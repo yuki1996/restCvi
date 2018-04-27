@@ -54,7 +54,7 @@ public class CVIController {
 		if (lescvs.getNbCV() == 0) {
 			return "<error>Aucun cv disponible</error>";
 		}
-		return "<lescvs>"+lescvs.toString()+"</lescvs>";
+		return "<lescvs>"+lescvs.toStringResume()+"</lescvs>";
 	}
 
 	@RequestMapping(value = "/resume/{id}",
@@ -189,7 +189,7 @@ public class CVIController {
 			return "<error>Identifiant erroné</error>";
 		}
 		lescvs.delete(id);
-		return "<lescv>"+lescvs.toString()+"</lescv>";
+		return "<id>"+id+"</id>";
 	}
 
 	@RequestMapping(value = "/update/{id}",
@@ -244,6 +244,6 @@ public class CVIController {
 			return "<error>Erreur lors de l'insertion</error>";
 		}
 		lescvs.update(id, nvCVS);
-		return "<lescv>"+lescvs.toString()+"</lescv>";
+		return "<id>"+id+"</id>";
 	}
 }

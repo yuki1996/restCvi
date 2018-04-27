@@ -7,7 +7,7 @@ public class Experience {
 	
 	public Experience (String dd, String df, String d) {
 		dateDeb = new DateEven(dd);
-		if (df == "yyyy-mm-dd") {
+		if (df == "yyyy-MM-dd") {
 			dateFin = null;
 		} else {
 			dateFin = new DateEven(df);

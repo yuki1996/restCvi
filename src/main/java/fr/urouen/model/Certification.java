@@ -7,7 +7,7 @@ public class Certification {
 	
 	public Certification(String dd, String df, String d) {
 		datedeb = new DateEven(dd);
-		if (df == "yyyy-mm-dd") {
+		if (df == "yyyy-MM-dd") {
 			datefin = null;
 		} else {
 			datefin = new DateEven(df);

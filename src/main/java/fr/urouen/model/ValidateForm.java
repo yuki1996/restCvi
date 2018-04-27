@@ -15,13 +15,13 @@ public class ValidateForm {
 		}
 
 		for (String s : dateDeb_exp) {
-			if (s == "yyyy-mm-dd") {
+			if (s == "yyyy-MM-dd") {
 				b = false;
 			}
 		}
 
 		for (String s : descript_exp) {
-			if (s == "yyyy-mm-dd") {
+			if (s == "yyyy-MM-dd") {
 				b = false;
 			}
 		}
