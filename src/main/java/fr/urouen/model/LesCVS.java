@@ -1,31 +1,22 @@
 package fr.urouen.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class LesCVS implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private List<CVS> lesCVS;
-
+	
 	public LesCVS() {
-		lesCVS = new LinkedList<CVS>();
-		insert(new CVS("Pierre", "Paul", "stage", "reactJS",
-				new ArrayList<Experience>(){{add(new Experience("2014-02-02", "2017-02-02", "Création d'un site web"));}},
-				new ArrayList<Diplome>(){{add(new Diplome("BAC", "2012-02-02", "S, spécilité mathématique", "Lycée"));}},
-				new ArrayList<Certification>(){{add(new Certification("2015-03-03", "2016-05-02", "C2I"));}},
-				new ArrayList<LV>(){{add(new LV("en", "CLES", "A1", null));}},
-				new ArrayList<Langage>(){{add(new Langage("Java", "2"));}},
-				new ArrayList<String>(){{add("cinéma");}}
-		));
-		//lesCVS = ReadXML.readXML("fichier");
+		lesCVS = ReadXML.readXML();
 	}
-
-	public void insert(CVS cv) {
+	
+	public int insert(CVS cv) {
 		cv.setId(lesCVS.size()+1);
 		lesCVS.add(cv);
+		return cv.getId();
 	}
-
+	
 	public void delete(int id) {
 		for (CVS cv : lesCVS) {
 			if (cv.getId() == id) {
@@ -33,7 +24,7 @@ public class LesCVS implements Serializable {
 			}
 		}
 	}
-
+	
 	public void update(int id, CVS nvCVS) {
 		for (CVS cv : lesCVS) {
 			if (cv.getId() == id) {
@@ -50,7 +41,7 @@ public class LesCVS implements Serializable {
 			}
 		}
 	}
-
+	
 	public String toString() {
 		String lescvs = "";
 		for (CVS cv : lesCVS) {
@@ -58,15 +49,7 @@ public class LesCVS implements Serializable {
 		}
 		return lescvs;
 	}
-
-	public String toStringResume() {
-		String lescvs = "";
-		for (CVS cv : lesCVS) {
-			lescvs += cv.toStringXMLResume();
-		}
-		return lescvs;
-	}
-
+	
 	public String getCV(int id) {
 		for (CVS cv : lesCVS) {
 			if (cv.getId() == id) {
@@ -75,7 +58,7 @@ public class LesCVS implements Serializable {
 		}
 		return null;
 	}
-
+	
 	public int getNbCV() {
 		return lesCVS.size();
 	}

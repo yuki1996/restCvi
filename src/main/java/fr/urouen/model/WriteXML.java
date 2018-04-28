@@ -1,7 +1,7 @@
 package fr.urouen.model;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,14 +13,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class WriteXML {
-	//crée dans le dossier racine du projet
-	public static void WriteXML(String nomFichier, LesCVS cvs) {
+	private static URL url = WriteXML.class.getClassLoader().getResource("../../resources/xml/fichier.xml");
+	private static File file = new File(url.getFile());	
+	
+	public static boolean writeXML(LesCVS cvs) {
 	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	    try {
 	        DocumentBuilder builder = factory.newDocumentBuilder();
@@ -138,9 +138,7 @@ public class WriteXML {
 		        	Element diversNode = document.createElement("divers");
 		        	diversNode.appendChild(document.createTextNode(d));
 		        	cvNode.appendChild(diversNode);
-		        	
 		        }
-		        
 		        racine.appendChild(cvNode);
 		        
 		        TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -148,21 +146,20 @@ public class WriteXML {
 				try {
 					transformer = transformerFactory.newTransformer();
 					DOMSource source = new DOMSource(document);
-			        StreamResult resultat = new StreamResult(new File(nomFichier+".xml"));
-			 
+			        StreamResult resultat = new StreamResult(file);
 			        try {
 						transformer.transform(source, resultat);
+						return true;
 					} catch (TransformerException e) {
 						e.printStackTrace();
 					}
 				} catch (TransformerConfigurationException e1) {
 					e1.printStackTrace();
 				}
-				
-		        
 	        }
 	    } catch (final ParserConfigurationException e) {
 	        e.printStackTrace();
 	    }   
+	    return false;
 	}
 }
