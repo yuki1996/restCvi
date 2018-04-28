@@ -7,7 +7,7 @@ public class Certification {
 	
 	public Certification(String dd, String df, String d) {
 		datedeb = new DateEven(dd);
-		if (df == "yyyy-MM-dd") {
+		if (df.equals("YYYY-MM-DD")) {
 			datefin = null;
 		} else {
 			datefin = new DateEven(df);
@@ -18,7 +18,9 @@ public class Certification {
 	public String toString() {
 		String rslt = "<certif>";
 		rslt += "<datedeb>"+datedeb+"</datedeb>";
-		rslt += "<datefin>"+datefin+"</datefin>";
+		if (datefin != null) {
+			rslt += "<datefin>"+datefin+"</datefin>";
+		}
 		rslt += "<descript>"+descript+"</descript>";
 		rslt += "</certif>";
 		return rslt;

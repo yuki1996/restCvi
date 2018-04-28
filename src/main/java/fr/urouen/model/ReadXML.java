@@ -2,8 +2,8 @@ package fr.urouen.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,14 +16,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class ReadXML {
-	public static ArrayList<CVS> readXML(String nomFichier) {
+	private static URL url = ReadXML.class.getClassLoader().getResource("../../resources/xml/fichier.xml");
+	private static File file = new File(url.getFile());	
+	public static ArrayList<CVS> readXML() {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		//LesCVS cvs = new LesCVS();
 		ArrayList<CVS> cvs = new ArrayList<CVS>();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            File file = new File(nomFichier+".xml");
             if (file.exists()) {
             	Document document= builder.parse(file);
                 Element racine = document.getDocumentElement();
@@ -36,7 +37,6 @@ public class ReadXML {
     	                Element cv = (Element) racineNoeuds.item(i);
     	                String nom = cv.getElementsByTagName("nom").item(0).getTextContent();
     	                String prenom = cv.getElementsByTagName("prenom").item(0).getTextContent();
-    	                //String objectifType = cv.getElementsByTagName("prenom").item(0).getTextContent();
     	                Element obj = (Element)cv.getElementsByTagName("objectif").item(0);
     	                Element objType = (Element)obj.getChildNodes().item(0);
     	                String objectif, objectifType;

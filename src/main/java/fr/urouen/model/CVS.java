@@ -1,12 +1,7 @@
 package fr.urouen.model;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlElement;
-
-@XmlRootElement(name = "cv")
 public class CVS implements Serializable {
 	private static final long serialVersionUID = 2L;
 	private int id;
@@ -20,8 +15,8 @@ public class CVS implements Serializable {
 	private ArrayList<LV> lvs;
 	private ArrayList<Langage> langages;
 	private ArrayList<String> divers;
-
-	public CVS(String n, String p, String ot, String o, ArrayList<Experience> e, ArrayList<Diplome> d,
+	
+	public CVS(String n, String p, String ot, String o, ArrayList<Experience> e, ArrayList<Diplome> d, 
 			ArrayList<Certification> c, ArrayList<LV> l, ArrayList<Langage> la, ArrayList<String> ds) {
 		nom = n;
 		prenom = p;
@@ -34,10 +29,10 @@ public class CVS implements Serializable {
 		langages = la;
 		divers = ds;
 	}
-
+	
 	public CVS() {
 	}
-
+	
 	public String toStringIdentite() {
 		String rslt = "<identite>";
 		rslt += "<nom>"+nom+"</nom>";
@@ -45,7 +40,7 @@ public class CVS implements Serializable {
 		rslt += "</identite>";
 		return rslt;
 	}
-
+	
 	public String toStringObjectif() {
 		String rslt = "<objectif>";
 		if (objectifType == "stage") {
@@ -60,16 +55,16 @@ public class CVS implements Serializable {
 		rslt += "</objectif>";
 		return rslt;
 	}
-
+	
 	public String toStringProf() {
 		String rslt = "<prof>";
 		for (Experience exp : exps) {
-			rslt += exp.toString();
+			rslt += exp.toString();	
 		}
 		rslt += "</prof>";
 		return rslt;
 	}
-
+	
 	public String toStringCompetence() {
 		String rslt = "<competences>";
 		for (Diplome diplome : diplomes) {
@@ -90,6 +85,20 @@ public class CVS implements Serializable {
 		return rslt;
 	}
 
+	public String toStringValid(){
+		String rslt = "<cv>";
+		rslt += toStringIdentite();
+		rslt += toStringObjectif();
+		rslt += toStringProf();
+		rslt += toStringCompetence();
+		for (String d : divers) {
+			rslt += "<divers>"+d+"</divers>";
+		}
+		rslt += "</cv>";
+		
+		return rslt;
+	}
+	
 	public String toStringXML() {
 		String rslt = "<cv>";
 		rslt += "<id>"+id+"</id>";
@@ -101,18 +110,7 @@ public class CVS implements Serializable {
 			rslt += "<divers>"+d+"</divers>";
 		}
 		rslt += "</cv>";
-
-		return rslt;
-	}
-
-
-	public String toStringXMLResume() {
-		String rslt = "<cv>";
-		rslt += "<id>"+id+"</id>";
-		rslt += toStringIdentite();
-		rslt += toStringObjectif();
-		rslt += "</cv>";
-
+		
 		return rslt;
 	}
 
