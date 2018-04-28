@@ -7,7 +7,7 @@ public class Experience {
 	
 	public Experience (String dd, String df, String d) {
 		dateDeb = new DateEven(dd);
-		if (df == "yyyy-MM-dd") {
+		if (df.equals("YYYY-MM-DD")) {
 			dateFin = null;
 		} else {
 			dateFin = new DateEven(df);
@@ -18,7 +18,9 @@ public class Experience {
 	public String toString() {
 		String rslt = "<expe>";
 		rslt += "<datedeb>"+dateDeb+"</datedeb>";
-		rslt += "<datefin>"+dateFin+"</datefin>";
+		if (dateFin != null) {
+			rslt += "<datefin>"+dateFin+"</datefin>";
+		}
 		rslt += "<descript>"+descript+"</descript>";
 		rslt += "</expe>";
 		return rslt;
