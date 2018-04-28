@@ -193,7 +193,7 @@ public class CVIController {
 	}
 
 	@RequestMapping(value = "/update/{id}",
-            method=RequestMethod.GET,
+            method=RequestMethod.POST,
             produces=MediaType.APPLICATION_XML_VALUE)
 	@ResponseBody
 	public String getUpdateId(@PathVariable("id") int id,
